@@ -22,4 +22,5 @@ urlpatterns = [
     path('preferences/', include('userpreferences.urls')),
     path('income/', include('userincome.urls')),
     path('admin/', admin.site.urls),
+    path('api/v1/', include('expenseswebsite.api_urls')),
 ]

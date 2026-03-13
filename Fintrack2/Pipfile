@@ -6,12 +6,16 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
-psycopg2 = "==2.7.7"
+django = ">=4.2"
+psycopg2-binary = "*"
 django-heroku = "*"
 gunicorn = "*"
-validate-email = "*"
-six = "*"
+py3-validate-email = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+django-cors-headers = "*"
+django-filter = "*"
+requests = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.11"
