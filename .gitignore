@@ -8,3 +8,4 @@ node_modules/
 frontend/dist/
 frontend/node_modules/
 .DS_Store
+Fintrack2\venv
