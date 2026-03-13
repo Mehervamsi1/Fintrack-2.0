@@ -13,28 +13,31 @@ export default function Sidebar({ open, onClose }) {
   return (
     <>
       {open && (
-        <div className="fixed inset-0 bg-black/50 z-20 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20 lg:hidden" onClick={onClose} />
       )}
       <aside className={`
-        fixed top-0 left-0 z-30 h-full w-64 bg-white border-r border-gray-200
-        transform transition-transform duration-200 ease-in-out
+        fixed top-0 left-0 z-30 h-full w-64 clay-sidebar
+        transform transition-transform duration-300 ease-in-out
         lg:translate-x-0 lg:static lg:z-0
         ${open ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="p-6">
-          <h1 className="text-xl font-bold text-indigo-600">FinTrack</h1>
+        <div className="p-6 pb-2">
+          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
+            FinTrack
+          </h1>
+          <p className="text-[11px] text-gray-400 font-medium mt-0.5 tracking-wider uppercase">Financial Dashboard</p>
         </div>
-        <nav className="px-3">
+        <nav className="px-3 mt-4">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
+                `flex items-center gap-3 px-4 py-3 rounded-2xl mb-1.5 text-sm font-medium transition-all duration-200
                 ${isActive
-                  ? 'bg-indigo-50 text-indigo-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'clay-card-flat bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-700'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-white/30'
                 }`
               }
             >

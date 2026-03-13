@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Sum
+from rest_framework.pagination import PageNumberPagination
+from django.db.models import Sum, Q
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
 from datetime import timedelta
@@ -9,9 +10,21 @@ from .models import UserIncome, Source
 from .serializers import UserIncomeSerializer, SourceSerializer
 
 
+class NoPagination(PageNumberPagination):
+    page_size = None
+
+
 class SourceViewSet(viewsets.ModelViewSet):
-    queryset = Source.objects.all()
     serializer_class = SourceSerializer
+    pagination_class = NoPagination
+
+    def get_queryset(self):
+        return Source.objects.filter(
+            Q(owner=self.request.user) | Q(owner__isnull=True)
+        )
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class UserIncomeViewSet(viewsets.ModelViewSet):

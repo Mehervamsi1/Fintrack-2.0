@@ -1,14 +1,19 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from django.db.models import Sum, F
 from .models import Asset, AssetCategory, AssetPriceHistory
 from .serializers import AssetSerializer, AssetCategorySerializer, AssetPriceHistorySerializer
+
+
+class NoPagination(PageNumberPagination):
+    page_size = None
 
 
 class AssetCategoryViewSet(viewsets.ModelViewSet):
     queryset = AssetCategory.objects.all()
     serializer_class = AssetCategorySerializer
+    pagination_class = NoPagination
 
 
 class AssetViewSet(viewsets.ModelViewSet):
